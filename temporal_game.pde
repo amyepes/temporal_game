@@ -23,7 +23,7 @@ long t_retardo = 3000;
 
 void setup() {
   //frameRate(30);
-  size(600, 800);
+  size(600, 700);
   background(100, 0, 50); //cuando hay muchos atrivutos esto se convierte en una especie de pantalla de carga
   menu = loadImage("Menu.jpg");
   fondop11 = loadImage("fondop11.png");
@@ -84,7 +84,25 @@ void draw() {
     if (back == 1) { //primer fondo
       image(fondop11, 0, 0, width/2, height);
       //vel = vel+0.03;
-      if ((90 > x || 90 > x+40) && (x > 28 || x+40 > 28) && (128 > y || 128 > y+60) && (y > 102 || y+60 > 102)) { //HAY QUE REPLICAR ESTE IF PARA CADA VALLA*****************************************************************************************
+      if ((90 > x || 90 > x+40) && (x > 29 || x+40 > 29) && (114 > y || 114 > y+60) && (y > 90 || y+60 > 90)) { //HAY QUE REPLICAR ESTE IF PARA CADA VALLA*****************************************************************************************
+        y = 94-60;// esta linea es para que el muñeco se devuelva unos pasos hacia atras y que no se bugee el retroseso 
+        //ax = 110;
+        vel = vel*-0.15;
+      }
+      
+      if ((155 > x || 155 > x+40) && (x > 92 || x+40 > 92) && (275 > y || 275 > y+60) && (y > 250 || y+60 > 250)) { //HAY QUE REPLICAR ESTE IF PARA CADA VALLA*****************************************************************************************
+        y = 94-60;// esta linea es para que el muñeco se devuelva unos pasos hacia atras y que no se bugee el retroseso 
+        //ax = 110;
+        vel = vel*-0.15;
+      }
+      
+      if ((220 > x || 220 > x+40) && (x > 157 || x+40 > 157) && (458 > y || 458 > y+60) && (y > 435 || y+60 > 435)) { //HAY QUE REPLICAR ESTE IF PARA CADA VALLA*****************************************************************************************
+        y = 94-60;// esta linea es para que el muñeco se devuelva unos pasos hacia atras y que no se bugee el retroseso 
+        //ax = 110;
+        vel = vel*-0.15;
+      }
+      
+      if ((155 > x || 155 > x+40) && (x > 92 || x+40 > 92) && (632 > y || 632 > y+60) && (y > 610 || y+60 > 610)) { //HAY QUE REPLICAR ESTE IF PARA CADA VALLA*****************************************************************************************
         y = 94-60;// esta linea es para que el muñeco se devuelva unos pasos hacia atras y que no se bugee el retroseso 
         //ax = 110;
         vel = vel*-0.15;
@@ -103,6 +121,30 @@ void draw() {
       if (back==-1) { //segundo fondo
         //vel = vel+0.03;
         image(fondop12, 0, 0, width/2-1, height);
+         if ((157 > x || 157 > x+40) && (x > 93 || x+40 > 93) && (113 > y || 113 > y+60) && (y > 90 || y+60 > 90)) { //HAY QUE REPLICAR ESTE IF PARA CADA VALLA*****************************************************************************************
+        y = 94-60;// esta linea es para que el muñeco se devuelva unos pasos hacia atras y que no se bugee el retroseso 
+        //ax = 110;
+        vel = vel*-0.15;
+      }
+      
+       if ((156 > x || 156 > x+40) && (x > 93 || x+40 > 93) && (274 > y || 274 > y+60) && (y > 252 || y+60 > 252)) { //HAY QUE REPLICAR ESTE IF PARA CADA VALLA*****************************************************************************************
+        y = 94-60;// esta linea es para que el muñeco se devuelva unos pasos hacia atras y que no se bugee el retroseso 
+        //ax = 110;
+        vel = vel*-0.15;
+      }
+      
+       if ((92 > x || 92 > x+40) && (x > 28 || x+40 > 28) && (447 > y || 447 > y+60) && (y > 423 || y+60 > 423)) { //HAY QUE REPLICAR ESTE IF PARA CADA VALLA*****************************************************************************************
+        y = 94-60;// esta linea es para que el muñeco se devuelva unos pasos hacia atras y que no se bugee el retroseso 
+        //ax = 110;
+        vel = vel*-0.15;
+      }
+      
+      if ((221 > x || 221 > x+40) && (x > 157 || x+40 > 157) && (608 > y || 608 > y+60) && (y > 585 || y+60 > 585)) { //HAY QUE REPLICAR ESTE IF PARA CADA VALLA*****************************************************************************************
+        y = 94-60;// esta linea es para que el muñeco se devuelva unos pasos hacia atras y que no se bugee el retroseso 
+        //ax = 110;
+        vel = vel*-0.15;
+      }
+      
       }
     }
 
