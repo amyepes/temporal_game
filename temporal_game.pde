@@ -1,7 +1,7 @@
 int vidas = 3;
 int pa = 0; /*variable que controla en que pantalla se esta
  actualmente, ya sea menu, opciones o juego.*/
-int back = 1;
+int back = 1, back2 = 1;
 
 float x = 110.0; //posicion del personaje en x
 float y = 0.0; //posicion personaje en y
@@ -15,7 +15,7 @@ int jump = 0; //variable control salto
 int post = 0; //variable control post-salto
 int imp = 0; //variable control impacto
 
-PImage fondo1, fondop11, fondop12, character1, carj1, menu;
+PImage fondo1, fondop11, fondop12, character1, carj1, menu, carril2;
 
 long tiempo = 0, tiempo2 = 0, t_actualizado = 0, t_actualizado2 = 0, t_retardo = 2800, t_retardo2 = 1000; //variables control del tiempo
 
@@ -35,6 +35,7 @@ void setup() {
   fondop12 = loadImage("fondop12.png");
   character1 = loadImage("car1.png");
   carj1 = loadImage("carj1.png");
+  carril2 = loadImage("carril2.jpeg");
 
   for (int i=0; i< images.length; i++) {
     images[i] = loadImage("car1 - copia (" + i + ").png");
@@ -59,36 +60,36 @@ void draw() {
     break;
 
   case 1: //aqui se programan las opciones
-  
+
     background(100);
 
     break;
-    
+
   case 2: //aqui se programa el juego
 
     image(fondo1, 0, 0, width, height);
     //y = y + vel;
 
-    if (keyPressed==true && key=='a') {
+    if (keyPressed==true && key=='a') { //MOVERSE A LA IZQUIERDA
       x = x - 5;
     }
 
-    if (keyPressed==true && key=='d') {
+    if (keyPressed==true && key=='d') { //MOVERSE A LA DERECHA
       x = x + 5;
     }
 
-    if (y > height+40/2) {
+    if (y > height+40/2) { //ALGORITMO PARA QUE EL PERSONAJE VUELVA HACIA ARRIBA CUANDO LLEGUE AL FINAL
       y = 0.0;
       back = back*-1;
       vel = vel+0.5;
       velact = vel;
     }
 
-    if (x < 0) {
+    if (x < 0) { //PARA QUE NO SE SALGA POR EL BORDE IZQUIERDO
       x = 1;
     }
 
-    if (x+40 >300) {
+    if (x+40 >300) { //PARA QUE NO SE SALGA POR EL BORDE DERECHO
       x = 298-40;
     }
 
@@ -107,7 +108,7 @@ void draw() {
         t_actualizado = tiempo;
       }
 
-      if (((90 > x || 90 > x+30) && (x > 29 || x+30 > 29) && (114 > y || 114 > y+40) && (y > 90 || y+40 > 90)) && jump==0) {
+      if (((90 > x || 90 > x+30) && (x > 29 || x+30 > 29) && (114 > y || 114 > y+40) && (y > 90 || y+40 > 90)) && jump==0) { //TODOS ESTOS IF SON PARA LAS COLISIONES CON LAS BARRERAS Y QUE NO SE PASE
         y = 90-50;// esta linea es para que el muñeco se devuelva unos pasos hacia atras y que no se bugee el retroseso
 
         vel = vel*-0.15;
@@ -183,19 +184,31 @@ void draw() {
         }
       }
     }
+    
+    image(carril2, 300, 0, width/2, height);
 
-    if (shine == 1) {
+    /*if (back2 ==1) {
+      image(carril2, 300, 0, width/2, height);
+      
+    } else{
+    if (back2 ==-1){
+      
+    }
+    }*/
+
+
+    if (shine == 1) {// ESTE IF ES PARA QUE EL PERSONAJE TITILE CUANDO SE CHOQUE
       image(images[imageIndex], x, y, 40, 60);
       imageIndex = (imageIndex+1) % images.length;
     }
 
-    if (jump == 0) {
+    if (jump == 0) {//IF PARA QUE SE VEA LA ANIMACION DE SALTO
       image(character1, x, y, 40, 60);
     } else {
       image(carj1, x, y, 40, 60);
     }
 
-    if (keyPressed == true && (key == 'w' || (key == 'a' && key == 'w') || (key == 'w' && key == 'd'))) {
+    if (keyPressed == true && (key == 'w' || (key == 'a' && key == 'w') || (key == 'w' && key == 'd'))) {//IF QUE CONTROLA EL SALTO CUANDO OPRIMA LA W 
       jump = 1;
       vel = 3;
       post = 1;
@@ -205,12 +218,12 @@ void draw() {
 
     tiempo2=millis();
 
-    if (post==1 && tiempo2 > t_actualizado2 + t_retardo2) {
+    if (post==1 && tiempo2 > t_actualizado2 + t_retardo2) {// ESTE  Y EL OTRO IF QUE SE PARECE SON PARA EL CONTROL DEL TIEMPO DE LAS ANIMACIONES
       vel = velact;
       post = 0;
       t_actualizado2 = tiempo;
     }
-    
+
     y = y + vel;
 
     break;
