@@ -8,14 +8,21 @@ float y = 0.0; //posicion personaje en y
 float vel = 5.0; //velocidad de avance del personaje en cuadros por ciclo
 float velact = 0; //variable control velocidad actual del ciclo, usada para mantener la velocidad que llevaba el personaje en el ciclo despues de que esta se haya reducido por un salto
 
-int cont = 0;
+float x2 = 437.0; //posicion del personaje en x
+float y2 = 0.0; //posicion personaje en y
+float vel2 = 5.0; //velocidad de avance del personaje en cuadros por ciclo
+float velact2 = 0;
 
-int shine = 0; //variable control titileo
-int jump = 0; //variable control salto
+int cont = 0, f = 1;
+
+long tiempotot;
+
+int shine = 0, shine2 = 0; //variable control titileo
+int jump = 0, jump2 = 0; //variable control salto
 int post = 0; //variable control post-salto
 int imp = 0; //variable control impacto
 
-PImage fondo1, fondop11, fondop12, character1, carj1, menu, carril2;
+PImage fondo1, fondop11, fondop12, character1, carj1, menu, carril2, character2, carj2, finl;
 
 long tiempo = 0, tiempo2 = 0, t_actualizado = 0, t_actualizado2 = 0, t_retardo = 2800, t_retardo2 = 1000; //variables control del tiempo
 
@@ -35,7 +42,10 @@ void setup() {
   fondop12 = loadImage("fondop12.png");
   character1 = loadImage("car1.png");
   carj1 = loadImage("carj1.png");
+  character2 = loadImage("car2.png");
+  carj2 = loadImage("carj2.png");
   carril2 = loadImage("carril2.jpeg");
+  finl = loadImage("finl.jpeg");
 
   for (int i=0; i< images.length; i++) {
     images[i] = loadImage("car1 - copia (" + i + ").png");
@@ -67,7 +77,9 @@ void draw() {
 
   case 2: //aqui se programa el juego
 
-    image(fondo1, 0, 0, width, height);
+
+
+    //image(fondo1, 0, 0, width, height);
     //y = y + vel;
 
     if (keyPressed==true && key=='a') { //MOVERSE A LA IZQUIERDA
@@ -83,6 +95,13 @@ void draw() {
       back = back*-1;
       vel = vel+0.5;
       velact = vel;
+    }
+
+    if (y2 > height+40/2) { //ALGORITMO PARA QUE EL PERSONAJE VUELVA HACIA ARRIBA CUANDO LLEGUE AL FINAL
+      y2 = 0.0;
+      back2 = back2*-1;
+      vel2 = vel2+0.5;
+      velact2 = vel2;
     }
 
     if (x < 0) { //PARA QUE NO SE SALGA POR EL BORDE IZQUIERDO
@@ -110,35 +129,38 @@ void draw() {
 
       if (((90 > x || 90 > x+30) && (x > 29 || x+30 > 29) && (114 > y || 114 > y+40) && (y > 90 || y+40 > 90)) && jump==0) { //TODOS ESTOS IF SON PARA LAS COLISIONES CON LAS BARRERAS Y QUE NO SE PASE
         y = 90-50;// esta linea es para que el muñeco se devuelva unos pasos hacia atras y que no se bugee el retroseso
-
         vel = vel*-0.15;
         shine = 1;
         imp = 1;
+        vidas = vidas -1;
       }
 
       if (((155 > x || 155 > x+30) && (x > 92 || x+30 > 92) && (275 > y || 275 > y+60) && (y > 250 || y+40 > 250)) && jump==0) {
         y = 243-50;// esta linea es para que el muñeco se devuelva unos pasos hacia atras y que no se bugee el retroseso
-
         vel = vel*-0.15;
         shine = 1;
         imp = 1;
+        vidas = vidas -1;
       }
 
       if (((220 > x || 220 > x+30) && (x > 157 || x+30 > 157) && (458 > y || 458 > y+60) && (y > 435 || y+40 > 435)) && jump==0) {
         y = 426-50;// esta linea es para que el muñeco se devuelva unos pasos hacia atras y que no se bugee el retroseso
-
         vel = vel*-0.15;
         shine = 1;
         imp = 1;
+        vidas = vidas -1;
       }
 
       if (((155 > x || 155 > x+30) && (x > 92 || x+30 > 92) && (632 > y || 632 > y+60) && (y > 610 || y+40 > 610)) && jump==0) {
         y = 599-50;// esta linea es para que el muñeco se devuelva unos pasos hacia atras y que no se bugee el retroseso
-
         vel = vel*-0.15;
         shine = 1;
         imp = 1;
+        vidas = vidas -1;
       }
+      textSize(17);
+      fill(100);
+      text("VIDAS: "+vidas, 0, 20);
     } else {
       if (back==-1) { //segundo fondo
 
@@ -160,6 +182,7 @@ void draw() {
           imp = 1;
           shine = 1;
           vel = vel*-0.15;
+          vidas = vidas -1;
         }
 
         if (((156 > x || 156 > x+30) && (x > 93 || x+30 > 93) && (274 > y || 274 > y+40) && (y > 252 || y+40 > 252)) && jump==0) {
@@ -167,6 +190,7 @@ void draw() {
           shine = 1;
           imp = 1;
           vel = vel*-0.15;
+          vidas = vidas -1;
         }
 
         if (((92 > x || 92 > x+30) && (x > 28 || x+30 > 28) && (447 > y || 447 > y+40) && (y > 423 || y+40 > 423)) && jump==0) {
@@ -174,6 +198,7 @@ void draw() {
           shine = 1;
           imp = 1;
           vel = vel*-0.15;
+          vidas = vidas -1;
         }
 
         if (((221 > x || 221 > x+30) && (x > 157 || x+30 > 157) && (608 > y || 608 > y+40) && (y > 585 || y+40 > 585)) && jump==0) {
@@ -181,20 +206,24 @@ void draw() {
           shine = 1;
           imp = 1;
           vel = vel*-0.15;
+          vidas = vidas -1;
         }
+        textSize(17);
+        fill(100);
+        text("VIDAS: "+vidas, 0, 20);
       }
     }
-    
+
     image(carril2, 300, 0, width/2, height);
 
     /*if (back2 ==1) {
-      image(carril2, 300, 0, width/2, height);
-      
-    } else{
-    if (back2 ==-1){
-      
-    }
-    }*/
+     image(carril2, 300, 0, width/2, height);
+     
+     } else{
+     if (back2 ==-1){
+     
+     }
+     }*/
 
 
     if (shine == 1) {// ESTE IF ES PARA QUE EL PERSONAJE TITILE CUANDO SE CHOQUE
@@ -208,7 +237,13 @@ void draw() {
       image(carj1, x, y, 40, 60);
     }
 
-    if (keyPressed == true && (key == 'w' || (key == 'a' && key == 'w') || (key == 'w' && key == 'd'))) {//IF QUE CONTROLA EL SALTO CUANDO OPRIMA LA W 
+    if (jump2 == 0) {//IF PARA QUE SE VEA LA ANIMACION DE SALTO
+      image(character2, x2, y2, 40, 60);
+    } else {
+      image(carj2, x2, y2, 40, 60);
+    }
+
+    if (keyPressed == true && (key == 'w' || (key == 'a' && key == 'w') || (key == 'w' && key == 'd'))) {//IF QUE CONTROLA EL SALTO CUANDO OPRIMA LA W
       jump = 1;
       vel = 3;
       post = 1;
@@ -225,12 +260,28 @@ void draw() {
     }
 
     y = y + vel;
+    y2 = y2 + vel2;
 
     break;
-  }
+  case 3:
+    if (f==1) {
+      f = 0;
+      tiempotot = millis();
+    }
+    image(finl, 0, 0, width, height);
+    textSize(20);
+    fill(0);
+    text("tiempo total: "+tiempotot, 200, 600);
+
+    break;
+  }// fin del switch
 
   /*cont = cont + 1;
    print(cont);*/
+
+  if (vidas == 0) {
+    pa = 3;
+  }
 
 
   println(vel);
