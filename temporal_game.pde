@@ -29,7 +29,7 @@ void setup() {
   //frameRate(30);
   size(600, 700);
   background(100, 0, 50); //cuando hay muchos atrivutos esto se convierte en una especie de pantalla de carga
-  menu = loadImage("Menu.jpg");
+  menu = loadImage("Nuevomenu.jpg");
   fondop11 = loadImage("fondop11.png");
   fondo1 = loadImage("fondo1.png");
   fondop12 = loadImage("fondop12.png");
