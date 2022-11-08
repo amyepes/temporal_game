@@ -48,11 +48,11 @@ void draw() {
 
     image(menu, -200, 0, 1000, height);
 
-    if (mouseButton==LEFT && mouseX>=110 && mouseX<=178 && mouseY>=0 && mouseY<=436) {
+    if (mouseButton==LEFT && mouseX>=96 && mouseX<=272 && mouseY>=392 && mouseY<=477) {
       pa = 2; //boton de inicio
     } else {
-      if (mouseButton==LEFT && mouseX>=110 && mouseX<=414 && mouseY>=0 && mouseY<=441) {
-        pa = 1; //boton de opciones
+      if (mouseButton==LEFT && mouseX>=327 && mouseX<=496 && mouseY>=399 && mouseY<=481) {
+        pa = 1; //boton de Creditos
       }
     }
 
